@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$font-general: "Be Vietnam Pro", sans-serif;
+$light-mode-main: #333333;
+$light-mode-bg: #ffffff;
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px; // reset margin mặc định
+    font-family: $font-general;
+    background-color: #ddd;
+}
+
+// center: căn giữa element trong nó
+.center {
+    margin: 50px auto 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+// hết center: căn giữa element trong nó
+
+// sign-up, dùng chung cho login luôn nha
+.sign-up {
+    width: 50%;
+    background-color: $light-mode-bg;
+    display: flex;
+    gap: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &__image {
+        width: calc((100% / 2) - 10px);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    &__main {
+        padding: 20px;
+        width: calc((100% / 2) - 10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__title {
+        margin: 0px; // reset margin mặc định của thẻ head
+        margin-bottom: 10px;
+        color: $light-mode-main;
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+
+        button[type="submit"] {
+            border: 0px;
+    
+            background-color: #007AFF;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 0px;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #135694;
+            }
+        }
+    }
+
+    &__form-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        label {
+            color: $light-mode-main;
+            font-size: 14px;
+        }
+
+        input {
+            border: 0px;
+            outline: none;
+            
+            background-color: #F2F2F2;
+            color: $light-mode-main;
+            height: 42px;
+            padding: 0px 16px;
+            border-radius: 6px;
+        }
+    }
+
+    &__form-link {
+        display: flex;
+        justify-content: end;
+
+        a {
+            text-decoration: none;
+            font-size: 12px;
+
+            &:hover {
+                color: red;
+            }
+        }
+    }
+
+    &__google {
+        border: 0px;
+
+        display: block;
+        width: 100%;
+        background-color: #333333;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 10px 0px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            background-color: #3d3c3c;
+        }
+
+        img {
+            width: 20px;
+            height: 20px;
+        }
+
+    }
+
+    @media (max-width: 1199.98px) {
+        
+        &__image {
+            width: 25%;
+        }
+
+        &__main {
+            width: calc(75% - 20px);
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        
+        &__image {
+            display: none;
+        }
+
+        &__main {
+            width: 100%;
+        }
+    }
+}
+// hết sign-up
