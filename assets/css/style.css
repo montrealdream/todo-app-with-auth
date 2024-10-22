@@ -76,6 +76,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  position: relative;
 }
 .sign-up__form-item label {
   color: #333333;
@@ -89,6 +90,14 @@ body {
   height: 42px;
   padding: 0px 16px;
   border-radius: 6px;
+}
+.sign-up__form-item [show-password] {
+  cursor: pointer;
+  position: absolute;
+  top: 33px;
+  right: 12px;
+  color: #333333;
+  font-size: 14px;
 }
 .sign-up__form-link {
   display: flex;
