@@ -454,3 +454,56 @@ body.dark .todo-app__item--finish, .todo-app__item--finish {
     color: white;
 }
 /** hết todo app*/
+
+// container
+.container {
+    width: 1140px;
+    margin: 0px auto;
+}
+// hết container
+
+// header
+.header {
+    background-color: $dark-mode-bg;
+    padding: 20px 0px;
+
+    &__wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo a {
+        text-decoration: none;
+        color: $dark-mode-main;
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    &__user {
+        // display: none; // khi chưa đăng nhập sẽ ẩn cả khối này
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__user-email {
+        color: $dark-mode-main;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    &__user-logout {
+        color: $dark-mode-main;
+        border: 1px solid $dark-mode-main;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+            color: $dark-mode-bg;
+            background-color: $light-mode-border;
+        }
+    }
+}
+// hết header

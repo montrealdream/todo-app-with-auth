@@ -401,5 +401,46 @@ body.dark .todo-app__item--finish, .todo-app__item--finish {
 }
 
 /** hết todo app*/
+.container {
+  width: 1140px;
+  margin: 0px auto;
+}
+
+.header {
+  background-color: #2B2B2B;
+  padding: 20px 0px;
+}
+.header__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__logo a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 36px;
+  font-weight: 700;
+}
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header__user-email {
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 400;
+}
+.header__user-logout {
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.header__user-logout:hover {
+  color: #2B2B2B;
+  background-color: #DDDDDD;
+}
 
 /*# sourceMappingURL=style.css.map */

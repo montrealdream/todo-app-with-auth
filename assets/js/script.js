@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -24,6 +24,8 @@ const auth = getAuth(app);  // Initialize Firebase Authentication and get a refe
 
 const todosRef = ref(db, 'todos');
 
+const headerTodo = document.querySelector(".header");
+
 // Tính năng đăng ký
 const signUpForm = document.querySelector("[sign-up]");
 if(signUpForm) {
@@ -38,9 +40,10 @@ if(signUpForm) {
         if(email && password) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    // Signed up 
+                    // Signed up (khi đăng kí thành công thì nó đăng nhập lun nha)
                     const user = userCredential.user;
                     if(user) {
+                        // chuyển hướng trang và show alert
                         window.location.href = "index.html";
                         showAlert("Đăng ký tài khoản thành công", "success", 3000);
                     }
@@ -88,6 +91,21 @@ if(loginForm) {
     });
 }
 // Hết Tính năng đăng nhập
+
+// Tính năng đăng xuất
+const logOut = headerTodo.querySelector("[btn-logout]");
+if(logOut) {
+    logOut.addEventListener("click", event => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            window.location.href = "login.html";
+            showAlert("Đăng xuất thành công", "success", 5000);
+          }).catch((error) => {
+            // An error happened.
+          });
+    });
+}
+// Hết Tính năng đăng xuất
 
 // form đăng kí, đăng nhập
 const signUpClass = document.querySelector(".sign-up");
