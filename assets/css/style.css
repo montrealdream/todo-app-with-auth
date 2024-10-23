@@ -1,4 +1,7 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* light mode */
+/* dark mode */
 * {
   box-sizing: border-box;
 }
@@ -20,7 +23,7 @@ body {
 
 .sign-up {
   width: 50%;
-  background-color: #ffffff;
+  background-color: rgba(246, 246, 246, 0.9647058824);
   display: flex;
   gap: 20px;
   border-radius: 8px;
@@ -41,11 +44,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: rgba(246, 246, 246, 0.9647058824);
 }
 .sign-up__title {
   margin: 0px;
   margin-bottom: 10px;
-  color: #333333;
+  color: #5A877D;
   font-size: 36px;
   font-weight: 700;
   text-align: center;
@@ -55,7 +59,7 @@ body {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #FFFFFF;
   margin-bottom: 20px;
 }
 .sign-up__form button[type=submit] {
@@ -79,14 +83,14 @@ body {
   position: relative;
 }
 .sign-up__form-item label {
-  color: #333333;
+  color: #5A877D;
   font-size: 14px;
 }
 .sign-up__form-item input {
   border: 0px;
   outline: none;
-  background-color: #F2F2F2;
-  color: #333333;
+  background-color: #FFFFFF;
+  color: #5A877D;
   height: 42px;
   padding: 0px 16px;
   border-radius: 6px;
@@ -96,7 +100,7 @@ body {
   position: absolute;
   top: 33px;
   right: 12px;
-  color: #333333;
+  color: #5A877D;
   font-size: 14px;
 }
 .sign-up__form-link {
@@ -149,5 +153,253 @@ body {
     width: 100%;
   }
 }
+
+/* alert */
+.alert {
+  /* vị trí */
+  position: fixed;
+  top: 50px;
+  right: 100px;
+  /* thông báo đẩy */
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.alert__item {
+  position: relative;
+  display: inline-flex;
+  width: 250px;
+  padding: 8px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.hideAlert {
+  /* sử dụng keyframe animation */
+  animation-name: alert-hidden;
+  animation-duration: 0.5s; /** thời gian thực hiện */
+  animation-fill-mode: both;
+}
+
+@keyframes alert-hidden {
+  from {
+    left: 0;
+  }
+  to {
+    left: 200%;
+    display: none;
+  }
+}
+.alert__item [close-alert] {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 8px;
+}
+
+.alert--success {
+  background-color: #D4EDDA;
+  color: #275724;
+}
+
+.alert--error {
+  background-color: #F8D7DA;
+  color: #721C24;
+}
+
+.alert--warning {
+  background-color: #FFF3CD;
+  color: #906404;
+}
+
+/* hết alert */
+/** todo app*/
+.todo-app {
+  width: 500px; /** độ rộng của cái form */
+  margin: 50px auto 50px auto; /** auto căn giữa cái form */
+  padding: 10px 20px;
+  background-color: rgba(246, 246, 246, 0.9647058824);
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+}
+
+body.dark .todo-app {
+  width: 500px; /** độ rộng của cái form */
+  margin: 50px auto 50px auto; /** auto căn giữa cái form */
+  padding: 10px 20px;
+  background-color: #2B2B2B;
+  border-radius: 8px;
+}
+
+.todo-app__title {
+  color: #5A877D;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+body.dark .todo-app__title {
+  color: #FFFFFF;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.todo-app__create {
+  display: flex;
+  height: 42px;
+  margin-bottom: 20px;
+}
+
+.todo-app__create input {
+  flex: 1; /** chiếm trọn phần còn lại */
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  outline: none;
+  height: 100%;
+  padding: 0px 10px;
+  border-radius: 8px 0px 0px 8px;
+  color: #000000;
+  font-size: 16px;
+}
+
+/* .todo-app__create input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #FFFFFF inset !important;
+} */
+body.dark .todo-app__create input {
+  flex: 1; /** chiếm trọn phần còn lại */
+  background-color: #3c3c3c;
+  border: 1px solid #3c3c3c;
+  outline: none;
+  height: 100%;
+  padding: 0px 10px;
+  border-radius: 8px 0px 0px 8px;
+  color: #FFFFFF;
+  font-size: 16px;
+  outline: none;
+}
+
+/* body.dark .todo-app__create input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    font-size: 16px;
+    -webkit-box-shadow: 0 0 0 30px #3c3c3c inset !important;
+}
+
+body.dark .todo-app__create input:-webkit-autofill{
+    font-size: 16px;
+    -webkit-text-fill-color: white !important;
+} */
+.todo-app__create button {
+  background-color: #5A877D;
+  border: 0;
+  width: 42px;
+  height: 100%;
+  margin-bottom: 20px;
+  border-radius: 0px 8px 8px 0px; /** bo 2 góc phải trên phải dưới */
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.todo-app__create button:hover {
+  background-color: #3e5953;
+  border: 0;
+  width: 42px;
+  height: 100%;
+  margin-bottom: 20px;
+  border-radius: 0px 8px 8px 0px; /** bo 2 góc phải trên phải dưới */
+  cursor: pointer;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+body.dark .todo-app__create button {
+  background-color: #FFFFFF;
+  border: 0;
+  width: 42px;
+  height: 100%;
+  margin-bottom: 20px;
+  border-radius: 0px 8px 8px 0px; /** bo 2 góc phải trên phải dưới */
+  cursor: pointer;
+  color: #000000;
+  font-size: 18px;
+}
+
+.todo-app__item {
+  display: flex;
+  align-items: center;
+  color: black;
+  background-color: #FFFFFF;
+  padding: 0px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+body.dark .todo-app__item {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #3c3c3c;
+  padding: 0px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+body.dark .todo-app__item--finish, .todo-app__item--finish {
+  background-color: #D8F0C1;
+  color: #000000;
+}
+
+.todo-app__item-content {
+  flex: 1;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.todo-app__item-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.todo-app__item-buton--complete {
+  background-color: #198754;
+  color: white;
+}
+
+.todo-app__item-buton--edit {
+  background-color: #FFC107;
+  color: white;
+}
+
+.todo-app__item-buton--delete {
+  background-color: #DC3545;
+  color: white;
+}
+
+/** hết todo app*/
 
 /*# sourceMappingURL=style.css.map */
