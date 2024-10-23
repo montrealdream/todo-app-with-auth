@@ -422,7 +422,7 @@ body.dark .todo-app__item--finish, .todo-app__item--finish {
   font-weight: 700;
 }
 .header__user {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
 }
@@ -433,9 +433,10 @@ body.dark .todo-app__item--finish, .todo-app__item--finish {
 }
 .header__user-logout {
   color: #FFFFFF;
+  font-size: 14px;
   border: 1px solid #FFFFFF;
-  padding: 10px;
   border-radius: 6px;
+  padding: 6px;
   cursor: pointer;
 }
 .header__user-logout:hover {

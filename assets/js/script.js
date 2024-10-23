@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged   } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -25,6 +25,7 @@ const auth = getAuth(app);  // Initialize Firebase Authentication and get a refe
 const todosRef = ref(db, 'todos');
 
 const headerTodo = document.querySelector(".header");
+const headerUser = headerTodo.querySelector(".header__user");
 
 // Tính năng đăng ký
 const signUpForm = document.querySelector("[sign-up]");
@@ -33,7 +34,7 @@ if(signUpForm) {
     signUpForm.addEventListener("submit", event => {
         event.preventDefault(); // chặn sự kiện mặc định
 
-        const fullName = signUpForm.fullName.value;
+        const display = signUpForm.fullName.value;
         const email = signUpForm.email.value;
         const password = signUpForm.password.value;
 
@@ -59,6 +60,7 @@ if(signUpForm) {
         }
     });
 }
+
 // Hết Tính năng đăng ký
 
 // Tính năng đăng nhập
@@ -106,6 +108,23 @@ if(logOut) {
     });
 }
 // Hết Tính năng đăng xuất
+
+// Lấy user đang đăng nhập
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        const email = user.email;
+        
+        // add email đang đăng nhập vào
+        headerUser.querySelector(".header__user-email").innerHTML = email;
+        headerUser.style.display = "flex"; // hiển thị lên
+    } 
+    else {
+        // User is signed out
+        // ...
+    }
+});
+// Hết Lấy user đang đăng nhập
 
 // form đăng kí, đăng nhập
 const signUpClass = document.querySelector(".sign-up");
