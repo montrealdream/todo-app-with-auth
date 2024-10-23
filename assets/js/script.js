@@ -1,9 +1,8 @@
-// firebase auth
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -25,6 +24,7 @@ const auth = getAuth(app);  // Initialize Firebase Authentication and get a refe
 
 const todosRef = ref(db, 'todos');
 
+// Tính năng đăng ký
 const signUpForm = document.querySelector("[sign-up]");
 if(signUpForm) {
     // lắng nghe sự kiện submit form đăng ký
@@ -56,7 +56,38 @@ if(signUpForm) {
         }
     });
 }
-// hết firbase auth
+// Hết Tính năng đăng ký
+
+// Tính năng đăng nhập
+const loginForm = document.querySelector("[login]");
+if(loginForm) {
+    // lắng nghe sự kiện submit form đăng nhập
+    loginForm.addEventListener("click", event => {
+        event.preventDefault();
+
+        const email = loginForm.email.value;
+        const password = loginForm.password.value;
+
+        if(email && password) {
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    if(user) {
+                        window.location.href = "index.html"; // chuyển đến trang chủ todo app khi đã đăng nhập thành công
+                        showAlert("Đăng nhập thành công", "success", 5000);
+                    }
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    showAlert("Đăng nhập thất bại", "error", 5000);
+                });
+        }
+    });
+}
+// Hết Tính năng đăng nhập
 
 // form đăng kí, đăng nhập
 const signUpClass = document.querySelector(".sign-up");

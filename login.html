@@ -12,6 +12,16 @@
     <title>Đăng Nhập</title>
 </head>
 <body class="dark">
+    <!-- alert thông báo -->
+    <div class="alert ">
+        <!-- <div class="alert__item alert--success">
+            <span>Tạo thành công !</span>
+            <span close-alert>
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+        </div> -->
+    </div>  
+    <!-- hết alert thông báo -->
     <div class="center">
         <div class="sign-up">
             <div class="sign-up__image">
@@ -19,7 +29,7 @@
             </div>
             <div class="sign-up__main">
                 <h2 class="sign-up__title">Đăng Nhập</h2>
-                <form action="#" class="sign-up__form">
+                <form action="#" class="sign-up__form" login>
                     <div class="sign-up__form-item">
                         <label for="">Email</label>
                         <input type="email" name="email" placeholder="Nhập email..."> 
@@ -34,7 +44,10 @@
                     </div>
 
                     <div class="sign-up__form-link">
-                        <a href="#">Quên mật khẩu ?</a>
+                        <a href="sign-up.html">Đăng ký</a>
+                    </div>
+                    <div class="sign-up__form-link">
+                        <a href="forgot-password.html">Quên mật khẩu ?</a>
                     </div>
                     <button type="submit">Đăng nhập</button>
                 </form>
