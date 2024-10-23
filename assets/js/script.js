@@ -116,11 +116,31 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
         const email = user.email;
+        const fullName = user.displayName;
         
-        // add email đang đăng nhập vào
-        headerUser.querySelector(".header__user-email").innerHTML = email;
+        // thêm danh sách các thông tin
+        const newDiv = document.createElement("div");
+        newDiv.setAttribute("class", "header__user-info");
+        newDiv.innerHTML = `
+            <div class="header__info-item">
+                ${fullName}
+            </div>
+            <div class="header__info-item">
+                    ${email}
+            </div>
+            <div class="header__info-item">
+                <span>Chế độ tối</span>
+                <div class="dark-mode"></div>
+            </div>
+
+            <div class="header__info-item">
+                    Đăng xuất
+            </div>
+        `;
+
+        headerUser.appendChild(newDiv);
+        headerUser.querySelector("img").src = user.photoURL; // add ảnh của user vào khi đăng nhập
         headerUser.style.display = "flex"; // hiển thị lên
-        console.log(user);
     } 
     else {
         // User is signed out
@@ -129,7 +149,17 @@ onAuthStateChanged(auth, (user) => {
 });
 // Hết Lấy user đang đăng nhập
 
-// form đăng kí, đăng nhập
+// Khi nhấn vào hình ảnh, show ra thông tin và lựa chọn của user
+const openInfoUser = document.querySelector("[open-info-user]");
+if(openInfoUser) {
+    openInfoUser.addEventListener("click", event => {
+        const userInfo = openInfoUser.querySelector(".header__user-info");
+        userInfo.classList.toggle("header__user-info-show");
+    });
+}
+// Hết Khi nhấn vào hình ảnh, show ra thông tin và lựa chọn của user
+
+// show password khi đăng ký đăng nhập
 const signUpClass = document.querySelector(".sign-up");
 if(signUpClass) {
     const passWordInput = signUpClass.querySelector("input[type='password']");
@@ -158,4 +188,10 @@ if(signUpClass) {
         // hết tính năng xem mật khẩu ẩn hiện
     }
 }
-// hết form đăng kí, đăng nhập
+// hết show password khi đăng ký đăng nhập
+
+// khi nhấn ra bên ngoài sẽ tắt các cái đang show
+document.addEventListener("click" , event => {  
+    // ... từ từ sẽ xử lý
+});
+// hết khi nhấn ra bên ngoài sẽ tắt các cái đang show
