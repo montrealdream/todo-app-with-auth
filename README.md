@@ -4,6 +4,7 @@
 
 ## TÍNH NĂNG
 -  CRUD: Thêm, Sửa, Xóa, Xem công việc
+-  Authen: Email, Google
 -  Dark/Light Mode: Chế độ sáng tối màn hình
 ## TECH STACK
 <div>
@@ -14,7 +15,12 @@
 </div>
 
 ## DELOY 
-Trang chủ: 
+Trang đăng ký:
 ```
-https://todo-app-firebase-xi.vercel.app/
+https://todo-app-with-auth-tan.vercel.app/sign-up.html
+```
+
+Trang đăng nhập:
+```
+https://todo-app-with-auth-tan.vercel.app/login.html
 ```
