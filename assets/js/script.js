@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged   } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -34,22 +34,24 @@ if(signUpForm) {
     signUpForm.addEventListener("submit", event => {
         event.preventDefault(); // chặn sự kiện mặc định
 
-        const display = signUpForm.fullName.value;
         const email = signUpForm.email.value;
         const password = signUpForm.password.value;
 
         if(email && password) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
+                    // update profile cho user nè (tạo thành công thì update)
+                    updateProfile(auth.currentUser, {
+                        displayName: signUpForm.fullName.value, 
+                        photoURL: "https://phunuvietnam.mediacdn.vn/media/news/33abffcedac43a654ac7f501856bf700/anh-profile-tiet-lo-g-ve-ban-1.jpg"
+                    });
+
                     // Signed up (khi đăng kí thành công thì nó đăng nhập lun nha)
                     const user = userCredential.user;
-                    if(user) {
-                        // chuyển hướng trang và show alert
-                        window.location.href = "index.html";
-                        showAlert("Đăng ký tài khoản thành công", "success", 3000);
-                    }
 
-                    // ...
+                    // chuyển hướng trang và show alert
+                    window.location.href = "index.html";
+                    showAlert("Đăng ký tài khoản thành công", "success", 3000);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -118,6 +120,7 @@ onAuthStateChanged(auth, (user) => {
         // add email đang đăng nhập vào
         headerUser.querySelector(".header__user-email").innerHTML = email;
         headerUser.style.display = "flex"; // hiển thị lên
+        console.log(user);
     } 
     else {
         // User is signed out
