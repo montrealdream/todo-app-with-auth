@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -25,7 +25,7 @@ const auth = getAuth(app);  // Initialize Firebase Authentication and get a refe
 const todosRef = ref(db, 'todos');
 
 const headerTodo = document.querySelector(".header");
-const headerUser = headerTodo.querySelector(".header__user");
+
 
 // Tính năng đăng ký
 const signUpForm = document.querySelector("[sign-up]");
@@ -96,24 +96,46 @@ if(loginForm) {
 }
 // Hết Tính năng đăng nhập
 
-// Tính năng đăng xuất
-const logOut = headerTodo.querySelector("[btn-logout]");
-if(logOut) {
-    logOut.addEventListener("click", event => {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            window.location.href = "login.html";
-            showAlert("Đăng xuất thành công", "success", 5000);
-          }).catch((error) => {
-            // An error happened.
-          });
+// Tính năng quên mật khẩu
+const forgotPassWordForm = document.querySelector("[forgot-password]");
+if(forgotPassWordForm) {
+    forgotPassWordForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const email = forgotPassWordForm.email.value;
+        if(email) {
+            // cách 1: Cách này thì phải setup tên miền local thì 127.0.0.1
+            /** 
+             *  giải thích: cách này thì không cần dùng trang otp vì khi nhận mail sẽ nhấn vào link, link đó sẽ yêu cầu bạn nhập mật khẩu mới. 
+             * 
+             *  thì sau khi vào link nhập mật khẩu mới thì nó sẽ chuyển hướng trang web theo url
+            */
+            const actionCodeSettings = {
+                url: `http://127.0.0.1:5500/FrontEnd/todo-app-with-auth/login.html`
+            }
+            sendPasswordResetEmail(auth, email, actionCodeSettings)
+                .then(() => {
+                    showAlert("Đã gửi email thành công", "success", 5000);
+                    // Password reset email sent!
+                    // ..
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    showAlert("Gửi email thất bại", "error", 5000);
+                    // ..
+                });
+            // hết cách 1
+        }
+        
     });
 }
-// Hết Tính năng đăng xuất
+// Hết Tính năng quên mật khẩu
 
 // Lấy user đang đăng nhập
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        const headerUser = headerTodo.querySelector(".header__user");
         const uid = user.uid;
         const email = user.email;
         const fullName = user.displayName;
@@ -133,7 +155,7 @@ onAuthStateChanged(auth, (user) => {
                 <div class="dark-mode"></div>
             </div>
 
-            <div class="header__info-item">
+            <div class="header__info-item" btn-logout>
                     Đăng xuất
             </div>
         `;
@@ -141,6 +163,23 @@ onAuthStateChanged(auth, (user) => {
         headerUser.appendChild(newDiv);
         headerUser.querySelector("img").src = user.photoURL; // add ảnh của user vào khi đăng nhập
         headerUser.style.display = "flex"; // hiển thị lên
+
+        // Tính năng đăng xuất
+        const logOut = headerTodo.querySelector("[btn-logout]");
+        if(logOut) {
+            logOut.addEventListener("click", event => {
+                signOut(auth)
+                .then(() => {
+                    // Sign-out successful.
+                    window.location.href = "login.html";
+                    showAlert("Đăng xuất thành công", "success", 5000);
+                })
+                .catch((error) => {
+                    // An error happened.
+                });
+    });
+}
+// Hết Tính năng đăng xuất
     } 
     else {
         // User is signed out
