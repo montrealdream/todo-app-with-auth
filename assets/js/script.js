@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -250,3 +250,28 @@ if(loginGoogle) {
     });
 }
 // Hết Tính năng đăng nhập với tài khoản Google
+
+// Tính năng đăng nhập với tài khoản Facebook
+const loginFacebook = document.querySelector("[login-facebook]");
+if(loginFacebook) {
+    loginFacebook.addEventListener("click", event => {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                window.location.href = "index.html";
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = FacebookAuthProvider.credentialFromError(error);
+
+                // ...
+                showAlert("Đăng nhập thất bại", "error", 5000);
+            });
+    });
+}
+// Hết Tính năng đăng nhập với tài khoản Facebook

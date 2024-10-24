@@ -114,7 +114,7 @@ body {
 .sign-up__form-link a:hover {
   color: red;
 }
-.sign-up__google {
+.sign-up__google, .sign-up__facebook {
   border: 0px;
   display: block;
   width: 100%;
@@ -123,6 +123,7 @@ body {
   font-size: 12px;
   font-weight: 400;
   padding: 10px 0px;
+  margin-bottom: 10px;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -130,12 +131,18 @@ body {
   align-items: center;
   gap: 10px;
 }
-.sign-up__google:hover {
+.sign-up__google:hover, .sign-up__facebook:hover {
   background-color: #3d3c3c;
 }
-.sign-up__google img {
+.sign-up__google img, .sign-up__facebook img {
   width: 20px;
   height: 20px;
+}
+.sign-up__facebook {
+  background-color: #007AFF;
+}
+.sign-up__facebook i {
+  font-size: 18px;
 }
 @media (max-width: 1199.98px) {
   .sign-up__image {

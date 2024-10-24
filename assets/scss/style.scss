@@ -151,7 +151,7 @@ body {
         }
     }
 
-    &__google {
+    &__google, &__facebook {
         border: 0px;
 
         display: block;
@@ -161,6 +161,7 @@ body {
         font-size: 12px;
         font-weight: 400;
         padding: 10px 0px;
+        margin-bottom: 10px;
         border-radius: 6px;
         cursor: pointer;
 
@@ -177,7 +178,12 @@ body {
             width: 20px;
             height: 20px;
         }
-
+    }
+    &__facebook {
+        background-color: #007AFF;
+        i {
+            font-size: 18px;
+        }
     }
 
     @media (max-width: 1199.98px) {
