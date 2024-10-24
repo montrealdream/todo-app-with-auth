@@ -277,5 +277,10 @@ if(loginFacebook) {
                 showAlert("Đăng nhập thất bại", "error", 5000);
             });
     });
+    /** MỘT SỐ LƯU Ý
+     *  Issue gặp phải là khi mình login bằng tài khoản google rồi mà sau đó mình login bằng tài khoản facebook nhưng lại cùng một email thì sẽ không loggin được.
+     * 
+     * Khắc phục: https://stackoverflow.com/questions/44015751/firebase-js-api-auth-account-exists-with-different-credential
+     */
 }
 // Hết Tính năng đăng nhập với tài khoản Facebook
