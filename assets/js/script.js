@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 
 import { getDatabase, ref, push, set, onValue, remove, update  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 // module alert
 import showAlert from "./show-alert.js";
@@ -23,9 +23,7 @@ const db = getDatabase(); // Initialize Database
 const auth = getAuth(app);  // Initialize Firebase Authentication and get a reference to the service
 
 const todosRef = ref(db, 'todos');
-
 const headerTodo = document.querySelector(".header");
-
 
 // Tính năng đăng ký
 const signUpForm = document.querySelector("[sign-up]");
@@ -134,7 +132,7 @@ if(forgotPassWordForm) {
 
 // Lấy user đang đăng nhập
 onAuthStateChanged(auth, (user) => {
-    if (user) {
+    if (user) {   
         const headerUser = headerTodo.querySelector(".header__user");
         const uid = user.uid;
         const email = user.email;
@@ -234,3 +232,21 @@ document.addEventListener("click" , event => {
     // ... từ từ sẽ xử lý
 });
 // hết khi nhấn ra bên ngoài sẽ tắt các cái đang show
+ 
+// Tính năng đăng nhập với tài khoản Google
+const loginGoogle = document.querySelector("[login-google]");
+if(loginGoogle) {
+    const provider = new GoogleAuthProvider(); 
+    loginGoogle.addEventListener("click", event => {
+        // Your web app's Firbase configuration Google
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // đăng nhập thành công
+                window.location.href = "index.html";
+            })
+            .catch((error) => {
+                showAlert("Đăng nhập thất bại", "error", 5000);
+            });
+    });
+}
+// Hết Tính năng đăng nhập với tài khoản Google
