@@ -262,6 +262,7 @@ if(loginFacebook) {
             })
             .catch((error) => {
                 // Handle Errors here.
+                
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
@@ -270,6 +271,9 @@ if(loginFacebook) {
                 const credential = FacebookAuthProvider.credentialFromError(error);
 
                 // ...
+                console.log(error);
+                console.log(errorCode);
+                console.log(errorMessage);
                 showAlert("Đăng nhập thất bại", "error", 5000);
             });
     });
